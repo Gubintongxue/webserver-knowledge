@@ -1,3 +1,7 @@
+板凳精神
+
+[c++项目——TinyWebServer（知识点总结） - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/475286130)
+
 ## int getopt(int argc,char * const argv[ ],const char * optstring);
 
 前两个参数就是main函数的两个参数！第三个参数是个字符串，叫他***选项字符串。\***

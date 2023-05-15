@@ -1,3 +1,7 @@
+板凳精神
+
+[C++ webserver服务器项目相关知识点总结 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/497215631)
+
 ## GCC工作流程
 
 ![img](markdown-image/C++ webserver服务器项目相关知识点总结.assets/v2-8e7e94a3c2d2c300500a8b3bbe4b557a_1440w.webp)
