@@ -18,7 +18,7 @@
 
 stat函数用于取得指定文件的文件属性，并将文件属性存储在结构体stat里，这里仅对其中用到的成员进行介绍。
 
-```
+```cpp
  1#include <sys/types.h>
  2#include <sys/stat.h>
  3#include <unistd.h>
@@ -37,7 +37,7 @@ stat函数用于取得指定文件的文件属性，并将文件属性存储在�
 
 用于将一个文件或其他对象映射到内存，提高文件的访问速度。
 
-```
+```cpp
 1void* mmap(void* start,size_t length,int prot,int flags,int fd,off_t offset);
 2int munmap(void* start,size_t length);
 ```
@@ -64,7 +64,7 @@ stat函数用于取得指定文件的文件属性，并将文件属性存储在�
 
 定义了一个向量元素，通常，这个结构用作一个多元素的数组。
 
-```
+```cpp
 1struct iovec {
 2    void      *iov_base;      /* starting address of buffer */
 3    size_t    iov_len;        /* size of buffer */
@@ -80,7 +80,7 @@ stat函数用于取得指定文件的文件属性，并将文件属性存储在�
 
 writev函数用于在一次函数调用中写多个非连续缓冲区，有时也将这该函数称为聚集写。
 
-```
+```cpp
 1#include <sys/uio.h>
 2ssize_t writev(int filedes, const struct iovec *iov, int iovcnt);
 ```
@@ -101,7 +101,7 @@ writev函数用于在一次函数调用中写多个非连续缓冲区，有时�
 
 其中，服务器子线程完成报文的解析与响应；主线程监测读写事件，调用`read_once`和`http_conn::write`完成数据的读取与发送。
 
-![图片](markdown-image/最新版Web服务器项目详解 - 06 http连接处理（下）.assets/640.jpeg)
+![图片](image/640-16845718871051.jpeg)
 
 #### **HTTP_CODE含义**
 
@@ -189,7 +189,7 @@ m_url为请求报文中解析出的请求资源，以/开头，也就是`/xxx`�
 
 如果大家对上述设置方式不理解，不用担心。具体的登录和注册校验功能会在第12节进行详解，到时候还会针对html进行介绍。
 
-```
+```cpp
  1//网站根目录，文件夹内存放请求的资源和跳转的html文件
  2const char* doc_root="/home/qgy/github/ini_tinywebserver/root";
  3
@@ -276,7 +276,7 @@ m_url为请求报文中解析出的请求资源，以/开头，也就是`/xxx`�
 
 上述涉及的5个函数，均是内部调用`add_response`函数更新`m_write_idx`指针和缓冲区`m_write_buf`中的内容。
 
-```
+```cpp
  1bool http_conn::add_response(const char* format,...)
  2{
  3    //如果写入内容超出m_write_buf大小则报错
@@ -357,7 +357,7 @@ m_url为请求报文中解析出的请求资源，以/开头，也就是`/xxx`�
 
 
 
-```
+```cpp
  1bool http_conn::process_write(HTTP_CODE ret)
  2{
  3    switch(ret)
@@ -451,7 +451,7 @@ m_url为请求报文中解析出的请求资源，以/开头，也就是`/xxx`�
 
     
 
-```
+```cpp
  1bool http_conn::write()
  2{
  3    int temp = 0;

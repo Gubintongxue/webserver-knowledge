@@ -16,7 +16,7 @@ epoll涉及的知识较多，这里仅对API和基础知识作介绍。更多资
 
 #### **epoll_create函数**
 
-```
+```cpp
 1#include <sys/epoll.h>
 2int epoll_create(int size)
 3
@@ -26,7 +26,7 @@ epoll涉及的知识较多，这里仅对API和基础知识作介绍。更多资
 
 #### **epoll_ctl函数**
 
-```
+```cpp
 1#include <sys/epoll.h>
 2int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)
 3
@@ -46,7 +46,7 @@ epoll涉及的知识较多，这里仅对API和基础知识作介绍。更多资
 
 上述event是epoll_event结构体指针类型，表示内核所监听的事件，具体定义如下：
 
-```
+```cpp
 1struct epoll_event {
 2__uint32_t events; /* Epoll events */
 3epoll_data_t data; /* User data variable */
@@ -67,7 +67,7 @@ epoll涉及的知识较多，这里仅对API和基础知识作介绍。更多资
 
 #### **epoll_wait函数**
 
-```
+```cpp
 1#include <sys/epoll.h>
 2int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout)
 3
@@ -159,7 +159,7 @@ HTTP请求报文由请求行（request line）、请求头部（header）、空�
 
 
 
-```
+```cpp
  1    GET /562f25980001b1b106000338.jpg HTTP/1.1
  2    Host:img.mukewang.com
  3    User-Agent:Mozilla/5.0 (Windows NT 10.0; WOW64)
@@ -178,7 +178,7 @@ HTTP请求报文由请求行（request line）、请求头部（header）、空�
 
 
 
-```
+```cpp
 1    POST / HTTP1.1
 2    Host:www.wrox.com
 3    User-Agent:Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)
@@ -211,7 +211,7 @@ HTTP请求报文由请求行（request line）、请求头部（header）、空�
 
 HTTP响应也由四个部分组成，分别是：状态行、消息报头、空行和响应正文。
 
-```
+```cpp
  1HTTP/1.1 200 OK
  2Date: Fri, 22 May 2009 06:07:21 GMT
  3Content-Type: text/html; charset=UTF-8
@@ -265,7 +265,7 @@ HTTP有5种类型的状态码，具体的：
 
 带有状态转移的有限状态机示例代码。
 
-```
+```cpp
  1STATE_MACHINE(){
  2    State cur_State = type_A;
  3    while(cur_State != type_C){
@@ -305,7 +305,7 @@ HTTP有5种类型的状态码，具体的：
 
 这一部分代码在TinyWebServer/http/http_conn.h中，主要是http类的定义。
 
-```
+```cpp
   1class http_conn{
   2    public:
   3        //设置读取文件的名称m_real_file大小
@@ -431,7 +431,7 @@ HTTP有5种类型的状态码，具体的：
 
 这里，对read_once进行介绍。read_once读取浏览器端发送来的请求报文，直到无数据可读或对方关闭连接，读取到m_read_buffer中，并更新m_read_idx。
 
-```
+```cpp
  1//循环读取客户数据，直到无数据可读或对方关闭连接
  2bool http_conn::read_once()
  3{
@@ -470,7 +470,7 @@ HTTP有5种类型的状态码，具体的：
 
   
 
-```
+```cpp
 1//对文件描述符设置非阻塞
 2int setnonblocking(int fd)
 3{
@@ -487,7 +487,7 @@ HTTP有5种类型的状态码，具体的：
 
   
 
-```
+```cpp
  1void addfd(int epollfd, int fd, bool one_shot)
  2{
  3    epoll_event event;
@@ -514,7 +514,7 @@ HTTP有5种类型的状态码，具体的：
 
 
 
-```
+```cpp
 1void removefd(int epollfd, int fd)
 2{
 3    epoll_ctl(epollfd, EPOLL_CTL_DEL, fd, 0);
@@ -528,7 +528,7 @@ HTTP有5种类型的状态码，具体的：
 
   
 
-```
+```cpp
  1void modfd(int epollfd, int fd, int ev)
  2{
  3    epoll_event event;
@@ -550,7 +550,7 @@ HTTP有5种类型的状态码，具体的：
 
 浏览器端发出http连接请求，主线程创建http对象接收请求并将所有数据读入对应buffer，将该对象插入任务队列，工作线程从任务队列中取出一个任务进行处理。
 
-```
+```cpp
  1//创建MAX_FD个http类对象
  2http_conn* users=new http_conn[MAX_FD];
  3

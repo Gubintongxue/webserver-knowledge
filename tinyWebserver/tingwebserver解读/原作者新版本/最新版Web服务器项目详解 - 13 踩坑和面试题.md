@@ -1,4 +1,4 @@
-![图片](markdown-image/最新版Web服务器项目详解 - 13 踩坑和面试题.assets/640.png)
+![图片](image/640-16845726808081.png)
 
 
 

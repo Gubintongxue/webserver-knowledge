@@ -27,7 +27,7 @@
 
 首先看一下该函数的函数原型。
 
-```
+```cpp
 1#include <pthread.h>
 2int pthread_create (pthread_t *thread_tid,                 //返回新生成的线程的id
 3                    const pthread_attr_t *attr,         //指向线程属性的指针,通常设置为NULL
@@ -53,7 +53,7 @@ pthread_create的函数原型中第三个参数的类型为函数指针，指向
 
 具体定义可以看代码。需要注意，线程处理函数和运行函数设置为私有属性。
 
-```
+```cpp
  template<typename T>
  class threadpool{
      public:
@@ -106,7 +106,7 @@ pthread_create的函数原型中第三个参数的类型为函数指针，指向
 
 具体的，类对象传递时用this指针，传递给静态函数后，将其转换为线程池类，并调用私有成员函数run。
 
-```
+```cpp
  1template<typename T>
  2threadpool<T>::threadpool( connection_pool *connPool, int thread_number, int max_requests) : m_thread_number(thread_number), m_max_requests(max_requests), m_stop(false), m_threads(NULL),m_connPool(connPool){
  3
@@ -138,7 +138,7 @@ pthread_create的函数原型中第三个参数的类型为函数指针，指向
 
 通过list容器创建请求队列，向队列中添加时，通过互斥锁保证线程安全，添加完成后通过信号量提醒有任务要处理，最后注意线程同步。
 
-```
+```cpp
  1template<typename T>
  2bool threadpool<T>::append(T* request)
  3{
@@ -165,7 +165,7 @@ pthread_create的函数原型中第三个参数的类型为函数指针，指向
 
 内部访问私有成员函数run，完成线程处理要求。
 
-```
+```cpp
 1template<typename T>
 2void* threadpool<T>::worker(void* arg){
 3
@@ -180,7 +180,7 @@ pthread_create的函数原型中第三个参数的类型为函数指针，指向
 
 主要实现，工作线程从请求队列中取出某个任务进行处理，注意线程同步。
 
-```
+```cpp
  1template<typename T>
  2void threadpool<T>::run()
  3{
